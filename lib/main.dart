@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() => runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -22,7 +23,7 @@ List<String> title = [
 List<String> description = [
   "Used and near new secondhand books at great prices.",
   "We've successfully opened 20 stores across Australia.",
-  "If you're looking to downsize, sell or recycle old books, the Book Grocer can help."
+  "Sell or recycle old books"
 ];
 
 class HomePage extends StatelessWidget {
@@ -38,22 +39,30 @@ class HomePage extends StatelessWidget {
 class ContentPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return CarouselSlider(
-      autoPlay: false,
-      enableInfiniteScroll: false,
-      initialPage: 0,
-      reverse: false,
-      viewportFraction: 1.0,
-      aspectRatio: MediaQuery.of(context).size.aspectRatio,
-      height: MediaQuery.of(context).size.height,
-      items: [0, 1, 2].map((i) {
-        return Builder(
-          builder: (BuildContext context) {
-            return Container(
-                width: MediaQuery.of(context).size.width, child: AppIntro(i));
-          },
-        );
-      }).toList(),
+    return Center(
+      child: Container(
+        child: CarouselSlider(
+          autoPlay: false,
+          enableInfiniteScroll: false,
+          initialPage: 0,
+          reverse: false,
+          viewportFraction: 1.0,
+          autoPlayInterval: Duration(seconds: 3),
+          autoPlayAnimationDuration: Duration(milliseconds: 800),
+          autoPlayCurve: Cubic(0.4, 0.0, 0.2, 1.0),
+          aspectRatio: MediaQuery.of(context).size.aspectRatio,
+          pauseAutoPlayOnTouch: Duration(seconds: 10),
+          height: MediaQuery.of(context).size.height / 1.2,
+          items: [0, 1, 2].map((i) {
+            return Builder(
+              builder: (BuildContext context) {
+                return Container(
+                    width: MediaQuery.of(context).size.width, child: AppIntro(i));
+              },
+            );
+          }).toList(),
+        ),
+      ),
     );
   }
 }
@@ -74,33 +83,82 @@ class _AppIntroState extends State<AppIntro> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 25),
       child: Column(
         children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(70.0),
+          Center(
             child: Text(
               title[widget.index],
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 35, color: Color(0xFF5ABD8C)),
+              style: TextStyle(fontSize: 40, color: Color(0xFF5ABD8C)),
             ),
           ),
-          Text(
-            description[widget.index],
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 19, color: Color(0xFFAFDFC7)),
+          Padding(
+            padding: const EdgeInsets.only(top: 15),
+            child: Center(
+              child: Text(
+                description[widget.index],
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 14, color: Color(0xFFAFDFC7)),
+              ),
+            ),
+          ),
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 35),
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                child: Column(
+                  children: <Widget>[
+                    Image.asset(imagePath[widget.index]),
+                  ],
+                ),
+              ),
+            ),
           ),
           Container(
-            width: MediaQuery.of(context).size.width,
-            child: Column(
-              children: <Widget>[
-                Image.asset(imagePath[widget.index],
-                    width: MediaQuery.of(context).size.width),
-              ],
+            height: 50,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 150),
+              child: Stack(
+                children: <Widget>[DotsIndicators(widget.index)],
+              ),
             ),
           )
         ],
       ),
+    );
+  }
+}
+
+class DotsIndicators extends StatefulWidget {
+  int pageIndex;
+  DotsIndicators(this.pageIndex);
+  @override
+  _DotsIndicatorsState createState() => _DotsIndicatorsState();
+}
+
+class _DotsIndicatorsState extends State<DotsIndicators> {
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      scrollDirection: Axis.horizontal,
+      itemCount: 3,
+      itemBuilder: (context, int index) {
+        return Center(
+          child: Container(
+            margin: EdgeInsets.only(right: 10),
+            width: 10,
+            height: 10,
+            decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: index == widget.pageIndex
+                    ? Color(0xFF5ABD8C)
+                    : Color(0xFFAFDFC7)),
+          ),
+        );
+      },
     );
   }
 }
