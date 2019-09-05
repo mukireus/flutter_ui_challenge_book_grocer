@@ -54,7 +54,7 @@ class _UserState extends State<User> {
                           color: Color(0xFF5ABD8C),
                           shape: RoundedRectangleBorder(
                               borderRadius: new BorderRadius.circular(20.0)),
-                          onPressed: () {},
+                          onPressed: () {Navigator.of(context).pushNamed("/RegisterPage");},
                           child: Text(
                             "Sign Up",
                             style: TextStyle(fontSize: 15, color: Colors.white),

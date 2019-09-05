@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_book/login.dart';
+import 'package:flutter_book/register.dart';
 import 'package:flutter_book/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -11,6 +12,7 @@ void main() => runApp(MaterialApp(
       routes: <String, WidgetBuilder> {
         "/UserPage": (BuildContext context) => new User(),
         "/LoginPage": (BuildContext context) => new Login(),
+        "/RegisterPage": (BuildContext context) => new Register(),
       },
     ));
 
