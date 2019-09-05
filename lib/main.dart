@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_book/login.dart';
+import 'package:flutter_book/user.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() => runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Application Intro',
-      home: HomePage(),
+      home: FirstRun(),
+      routes: <String, WidgetBuilder> {
+        "/UserPage": (BuildContext context) => new User(),
+        "/LoginPage": (BuildContext context) => new Login(),
+      },
     ));
 
 List<String> imagePath = [
@@ -36,13 +42,35 @@ class HomePage extends StatelessWidget {
   }
 }
 
+class FirstRun extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return new FutureBuilder<SharedPreferences>(
+      future: SharedPreferences.getInstance(),
+      builder:
+          (BuildContext context, AsyncSnapshot<SharedPreferences> snapshot) {
+        switch (snapshot.connectionState) {
+          case ConnectionState.none:
+          case ConnectionState.waiting:
+            return new HomePage();
+          default:
+            if (!snapshot.hasError)
+              return snapshot.data.getBool("first run") != null
+                  ? new HomePage()
+                  : new User();
+        }
+      },
+    );
+  }
+}
+
 class ContentPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Container(
         child: CarouselSlider(
-          autoPlay: false,
+          autoPlay: true,
           enableInfiniteScroll: false,
           initialPage: 0,
           reverse: false,
@@ -57,7 +85,8 @@ class ContentPage extends StatelessWidget {
             return Builder(
               builder: (BuildContext context) {
                 return Container(
-                    width: MediaQuery.of(context).size.width, child: AppIntro(i));
+                    width: MediaQuery.of(context).size.width,
+                    child: AppIntro(i));
               },
             );
           }).toList(),
@@ -91,7 +120,7 @@ class _AppIntroState extends State<AppIntro> {
             child: Text(
               title[widget.index],
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 40, color: Color(0xFF5ABD8C)),
+              style: TextStyle(fontSize: 45, color: Color(0xFF5ABD8C)),
             ),
           ),
           Padding(
@@ -106,7 +135,7 @@ class _AppIntroState extends State<AppIntro> {
           ),
           Center(
             child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 35),
+              padding: const EdgeInsets.symmetric(vertical: 15),
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 child: Column(
@@ -118,7 +147,7 @@ class _AppIntroState extends State<AppIntro> {
             ),
           ),
           Container(
-            height: 50,
+            height: 30,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 150),
               child: Stack(
