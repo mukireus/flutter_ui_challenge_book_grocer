@@ -57,7 +57,7 @@ class FirstRun extends StatelessWidget {
             return new HomePage();
           default:
             if (!snapshot.hasError)
-              return snapshot.data.getBool("first run") != null
+              return snapshot.data.getBool("first run") == null
                   ? new HomePage()
                   : new User();
         }
