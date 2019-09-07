@@ -3,4 +3,4 @@
 
 
 UI Design : https://www.behance.net/gallery/83678145/The-Book-Grocer-App-Design-Free-Bookstore-UI-Kit
-![UI](https://github.com/mukireus/Phone-Book/blob/master/assets/ui.PNG)
+![UI](https://github.com/mukireus/flutter_book/blob/master/assets/ui.png)
