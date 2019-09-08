@@ -44,6 +44,7 @@ flutter:
   uses-material-design: true
   assets:
    - assets/images/
+   - assets/images/books/
 
   # To add assets to your application, add an assets section, like this:
   # assets:
