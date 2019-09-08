@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter_book/home.dart';
 import 'package:flutter_book/login.dart';
 import 'package:flutter_book/register.dart';
 import 'package:flutter_book/user.dart';
@@ -9,10 +10,11 @@ void main() => runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Application Intro',
       home: FirstRun(),
-      routes: <String, WidgetBuilder> {
+      routes: <String, WidgetBuilder>{
         "/UserPage": (BuildContext context) => new User(),
         "/LoginPage": (BuildContext context) => new Login(),
         "/RegisterPage": (BuildContext context) => new Register(),
+        "/HomePage": (BuildContext context) => new Home(),
       },
     ));
 
@@ -57,7 +59,7 @@ class FirstRun extends StatelessWidget {
             return new HomePage();
           default:
             if (!snapshot.hasError)
-              return snapshot.data.getBool("first run") == null
+              return snapshot.data.getBool("first run") != null
                   ? new HomePage()
                   : new User();
         }
@@ -131,13 +133,12 @@ class _AppIntroState extends State<AppIntro> {
               child: Text(
                 description[widget.index],
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 14, color: Color(0xFFAFDFC7)),
+                style: TextStyle(fontSize: 19, color: Color(0xFFAFDFC7)),
               ),
             ),
           ),
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 15),
+          Expanded(
+            child: Center(
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 child: Column(
@@ -148,12 +149,18 @@ class _AppIntroState extends State<AppIntro> {
               ),
             ),
           ),
-          Container(
-            height: 30,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 150),
-              child: Stack(
-                children: <Widget>[DotsIndicators(widget.index)],
+          Expanded(
+            child: Center(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                    height: 30,
+                    child: Stack(
+                      children: <Widget>[DotsIndicators(widget.index)],
+                    ),
+                  ),
+                ],
               ),
             ),
           )
