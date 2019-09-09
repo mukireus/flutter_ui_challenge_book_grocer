@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_book/search.dart';
+import 'package:flutter_book/wishlist.dart';
+import 'package:flutter_book/cart.dart';
 import 'ui_helper.dart';
 
 class Home extends StatefulWidget {
@@ -7,11 +10,48 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  int _selectedPage = 0;
+  final _pageOptions = [
+    _MainContent(),
+    SearchScreen(),
+    WishlistScreen(),
+    Cart()
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: _MainContent(),
+      body: _pageOptions[_selectedPage],
+      bottomNavigationBar: new Theme(
+        data: Theme.of(context).copyWith(
+          canvasColor: Color(0xFF5ABD8C),
+        ),
+        child: new BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          fixedColor: Color(0xFFFFFFFF),
+          unselectedItemColor: Color(0x50FFFFFF),
+          currentIndex: _selectedPage,
+          onTap: (int index) {
+            setState(() {
+              _selectedPage = index;
+            });
+          },
+          items: [
+            BottomNavigationBarItem(
+                icon: Icon(Icons.home, color: Color(0x50FFFFFF)),
+                title: Text('Home')),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.search, color: Color(0x50FFFFFF)),
+                title: Text('Search')),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.playlist_add, color: Color(0x50FFFFFF)),
+                title: Text('Wishlist')),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.shopping_cart, color: Color(0x50FFFFFF)),
+                title: Text('Home'))
+          ],
+        ),
+      ),
     );
   }
 }
@@ -335,7 +375,7 @@ Widget get MonthlyNewsletterCard => Padding(
                 ),
               ),
               Padding(
-                  padding: const EdgeInsets.fromLTRB(0,5,20,0),
+                  padding: const EdgeInsets.fromLTRB(0, 5, 20, 0),
                   child: Container(
                     alignment: Alignment.centerRight,
                     child: MaterialButton(
