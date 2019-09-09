@@ -20,3 +20,12 @@ List<BestSellersCard> BestSellersBook = [
   BestSellersCard("assets/images/books/book_tattletale.png", "Sarah J. Noughton",
       "Tattletale", "4"),
 ];
+
+List<RecentlyViewedCard> RecentlyViewedBook = [
+  RecentlyViewedCard("assets/images/books/book_tree.png", "Jake Arnott",
+      "The Fatal Tree"),
+  RecentlyViewedCard("assets/images/books/book_four.png", "LOTZ, SARAH",
+      "Day Four"),
+  RecentlyViewedCard("assets/images/books/book_d2d.png", "Edward Humes",
+      "Door to Door"),
+];
