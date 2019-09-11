@@ -20,6 +20,56 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: new Drawer(
+        child: Drawer(
+          child: ListView(
+            children: <Widget>[
+              ListTile(
+                title: Text(
+                  "Home",
+                ),
+                trailing: Icon(Icons.home),
+              ),
+              ListTile(
+                title: Text(
+                  "Our Books",
+                ),
+                trailing: Icon(Icons.book),
+              ),
+              ListTile(
+                title: Text(
+                  "Our Stores",
+                ),
+                trailing: Icon(Icons.store),
+              ),
+              ListTile(
+                title: Text(
+                  "Careers",
+                ),
+                trailing: Icon(Icons.work),
+              ),
+              ListTile(
+                title: Text(
+                  "Sell With Us",
+                ),
+                trailing: Icon(Icons.attach_money),
+              ),
+              ListTile(
+                title: Text(
+                  "Sign",
+                ),
+                trailing: Icon(Icons.person),
+              ),
+              ListTile(
+                title: Text(
+                  "Newsletter",
+                ),
+                trailing: Icon(Icons.library_books),
+              ),
+            ],
+          ),
+        ),
+      ),
       backgroundColor: Colors.white,
       body: _pageOptions[_selectedPage],
       bottomNavigationBar: new Theme(
