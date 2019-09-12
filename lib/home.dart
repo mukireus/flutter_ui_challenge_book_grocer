@@ -4,6 +4,8 @@ import 'package:flutter_book/wishlist.dart';
 import 'package:flutter_book/cart.dart';
 import 'ui_helper.dart';
 
+var _scaffoldKey = new GlobalKey<ScaffoldState>();
+
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
@@ -17,59 +19,12 @@ class _HomeState extends State<Home> {
     WishlistScreen(),
     Cart()
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: new Drawer(
-        child: Drawer(
-          child: ListView(
-            children: <Widget>[
-              ListTile(
-                title: Text(
-                  "Home",
-                ),
-                trailing: Icon(Icons.home),
-              ),
-              ListTile(
-                title: Text(
-                  "Our Books",
-                ),
-                trailing: Icon(Icons.book),
-              ),
-              ListTile(
-                title: Text(
-                  "Our Stores",
-                ),
-                trailing: Icon(Icons.store),
-              ),
-              ListTile(
-                title: Text(
-                  "Careers",
-                ),
-                trailing: Icon(Icons.work),
-              ),
-              ListTile(
-                title: Text(
-                  "Sell With Us",
-                ),
-                trailing: Icon(Icons.attach_money),
-              ),
-              ListTile(
-                title: Text(
-                  "Sign",
-                ),
-                trailing: Icon(Icons.person),
-              ),
-              ListTile(
-                title: Text(
-                  "Newsletter",
-                ),
-                trailing: Icon(Icons.library_books),
-              ),
-            ],
-          ),
-        ),
-      ),
+      key: _scaffoldKey,
+      endDrawer: AppDrawer(),
       backgroundColor: Colors.white,
       body: _pageOptions[_selectedPage],
       bottomNavigationBar: new Theme(
@@ -100,6 +55,98 @@ class _HomeState extends State<Home> {
                 icon: Icon(Icons.shopping_cart, color: Color(0x50FFFFFF)),
                 title: Text('Home'))
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class AppDrawer extends StatefulWidget {
+  @override
+  _AppDrawerState createState() => _AppDrawerState();
+}
+
+class _AppDrawerState extends State<AppDrawer> {
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+      borderRadius: BorderRadius.only(bottomLeft: Radius.circular(250)),
+      child: new Drawer(
+        child: Drawer(
+          child: ListView(
+            children: <Widget>[
+              ListTile(
+                title: Text(
+                  "Home",
+                  style: TextStyle(fontSize: 20),
+                ),
+                trailing: Icon(
+                  Icons.home,
+                  color: Color(0xFF5ABD8C),
+                ),
+              ),
+              ListTile(
+                title: Text(
+                  "Our Books",
+                  style: TextStyle(fontSize: 20),
+                ),
+                trailing: Icon(
+                  Icons.book,
+                  color: Color(0xFF5ABD8C),
+                ),
+              ),
+              ListTile(
+                title: Text(
+                  "Our Stores",
+                  style: TextStyle(fontSize: 20),
+                ),
+                trailing: Icon(
+                  Icons.store,
+                  color: Color(0xFF5ABD8C),
+                ),
+              ),
+              ListTile(
+                title: Text(
+                  "Careers",
+                  style: TextStyle(fontSize: 20),
+                ),
+                trailing: Icon(
+                  Icons.work,
+                  color: Color(0xFF5ABD8C),
+                ),
+              ),
+              ListTile(
+                title: Text(
+                  "Sell With Us",
+                  style: TextStyle(fontSize: 20),
+                ),
+                trailing: Icon(
+                  Icons.attach_money,
+                  color: Color(0xFF5ABD8C),
+                ),
+              ),
+              ListTile(
+                title: Text(
+                  "Newsletter",
+                  style: TextStyle(fontSize: 20),
+                ),
+                trailing: Icon(
+                  Icons.library_books,
+                  color: Color(0xFF5ABD8C),
+                ),
+              ),
+              ListTile(
+                title: Text(
+                  "Account",
+                  style: TextStyle(fontSize: 20),
+                ),
+                trailing: Icon(
+                  Icons.person,
+                  color: Color(0xFF5ABD8C),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -161,7 +208,9 @@ class AppBar extends StatelessWidget {
                   child: new IconButton(
                     icon: Icon(Icons.menu),
                     iconSize: 30,
-                    onPressed: () {},
+                    onPressed: () {
+                      _scaffoldKey.currentState.openEndDrawer();
+                    },
                   ),
                 ),
               )
