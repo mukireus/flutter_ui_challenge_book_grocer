@@ -8,7 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 void main() => runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Application Intro',
+      title: 'Booking',
       home: FirstRun(),
       routes: <String, WidgetBuilder>{
         "/UserPage": (BuildContext context) => new User(),
