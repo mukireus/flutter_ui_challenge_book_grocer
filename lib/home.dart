@@ -44,16 +44,16 @@ class _HomeState extends State<Home> {
           items: [
             BottomNavigationBarItem(
                 icon: Icon(Icons.home, color: Color(0x50FFFFFF)),
-                title: Text('Home')),
+                label: 'Home'),
             BottomNavigationBarItem(
                 icon: Icon(Icons.search, color: Color(0x50FFFFFF)),
-                title: Text('Search')),
+                label: 'Search'),
             BottomNavigationBarItem(
                 icon: Icon(Icons.playlist_add, color: Color(0x50FFFFFF)),
-                title: Text('Wishlist')),
+                label: 'Wishlist'),
             BottomNavigationBarItem(
                 icon: Icon(Icons.shopping_cart, color: Color(0x50FFFFFF)),
-                title: Text('Home'))
+                label: 'Home')
           ],
         ),
       ),
